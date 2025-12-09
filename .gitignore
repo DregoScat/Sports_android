@@ -1,3 +1,6 @@
+# Git Ignore - AI Fitness Monitor
+# ================================
+
 # Python
 __pycache__/
 *.py[cod]
@@ -23,10 +26,12 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Virtual Environment
+# Virtual Environments
 venv/
-env/
 ENV/
+env/
+.venv/
+.env/
 env.bak/
 venv.bak/
 
@@ -34,20 +39,83 @@ venv.bak/
 instance/
 .webassets-cache
 
-# IDEs
-.vscode/
+# IDE
 .idea/
+.vscode/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.settings/
 
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # Logs
 *.log
+logs/
 session_log.csv
+
+# Testing
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# MediaPipe cache
+.mediapipe/
+
+# Android
+android_app/.gradle/
+android_app/build/
+android_app/app/build/
+android_app/local.properties
+android_app/*.iml
+android_app/.idea/
+android_app/captures/
+android_app/.externalNativeBuild/
+android_app/.cxx/
+*.dex
+*.class
+*.hprof
+
+# Keep builds folder but ignore temp APKs in root
+!builds/
 
 # Environment variables
 .env
+.env.local
+.env.*.local
+*.env
+
+# Temp files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Model files (large)
+*.pb
+*.tflite
+*.h5
+*.onnx
+android_app/gradle.zip
