@@ -1,263 +1,73 @@
-# AI Fitness Monitor
-
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-2.2.5-green.svg)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10.x-orange.svg)
-![Android](https://img.shields.io/badge/Android-7.0+-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-**Real-time AI-powered fitness monitoring system using pose estimation**
-
-[Features](#features) • [Installation](#installation) • [Usage](#usage) • [API](#api) • [Architecture](#architecture) • [Contributing](#contributing)
-
-</div>
-
----
-
-## 🎯 Overview
-
-AI Fitness Monitor is a comprehensive fitness tracking system that uses computer vision and machine learning to analyze exercise form in real-time. The system consists of a Python server with pose detection capabilities and an Android mobile application for user interaction.
-
-### Key Features
-
-- **Real-time Squat Analysis**: Tracks squat depth, knee angles, and form with instant feedback
-- **Vertical Jump Measurement**: Measures jump height using pose estimation
-- **Voice Feedback**: Audio cues to guide proper exercise form
-- **Mobile Integration**: Android app for convenient mobile workout tracking
-- **WebSocket Streaming**: Low-latency video processing for smooth experience
-
----
-
-## 📁 Project Structure
-
-```
-SIH_SPORTS_proj/
-├── server/                     # Python backend server
-│   ├── src/
-│   │   ├── analyzers/         # Exercise analysis modules
-│   │   │   ├── squat_analyzer.py
-│   │   │   └── jump_analyzer.py
-│   │   ├── api/               # Flask API routes
-│   │   │   └── routes.py
-│   │   └── utils/             # Utility modules
-│   │       ├── camera_manager.py
-│   │       └── frame_processor.py
-│   ├── config/                # Configuration files
-│   │   └── settings.py
-│   ├── templates/             # HTML templates
-│   ├── tests/                 # Unit & integration tests
-│   ├── requirements.txt       # Python dependencies
-│   └── run.py                 # Main entry point
-│
-├── android_app/               # Android mobile application
-│   ├── app/src/main/
-│   │   ├── java/             # Kotlin source code
-│   │   └── res/              # Android resources
-│   ├── build.gradle.kts      # Gradle build config
-│   └── USER_MANUAL.md        # User documentation
-│
-├── builds/                    # Pre-built APK files
-│   └── FitnessMonitor.apk
-│
-├── docs/                      # Additional documentation
-│   ├── API.md                # API reference
-│   └── ARCHITECTURE.md       # System architecture
-│
-└── README.md                  # This file
-```
-
----
-
-## 🚀 Installation
-
-### Prerequisites
-
-- **Python 3.8+** with pip
-- **Android Studio** (for Android development)
-- **Webcam** (for local testing)
-
-### Server Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-repo/ai-fitness-monitor.git
-   cd ai-fitness-monitor
-   ```
-
-2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   
-   # Windows
-   venv\Scripts\activate
-   
-   # Linux/macOS
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   cd server
-   pip install -r requirements.txt
-   ```
-
-4. **Run the server**
-   ```bash
-   python run.py
-   ```
-
-   The server will start at `http://0.0.0.0:5000`
-
-### Android App Setup
-
-1. **Install pre-built APK**
-   - Transfer `builds/FitnessMonitor.apk` to your Android device
-   - Enable "Install from unknown sources"
-   - Install the APK
-
-2. **Or build from source**
-   ```bash
-   cd android_app
-   ./gradlew assembleDebug
-   ```
-
----
-
-## 📱 Usage
-
-### Quick Start
-
-1. **Start the server** on your computer
-2. **Connect your phone** to the same WiFi network
-3. **Open the app** and enter the server IP address
-4. **Select exercise type** (Squat or Jump)
-5. **Position yourself** in the camera frame
-6. **Start exercising** and get real-time feedback!
-
-### Server Modes
-
-- **Webcam Mode**: Uses your computer's webcam
-- **Mobile Mode**: Processes frames from the Android app
-
-### Exercise Guidelines
-
-#### Squats
-- Stand 6-8 feet from camera
-- Ensure full body is visible
-- Listen for voice feedback on depth
-
-#### Vertical Jumps
-- Stand still for calibration
-- Jump straight up
-- Wait for height measurement
-
----
-
-## 🔌 API Reference
-
-### Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Web interface |
-| GET | `/squat_feed` | MJPEG squat analysis stream |
-| GET | `/jump_feed` | MJPEG jump analysis stream |
-| POST | `/process_frame` | Process mobile camera frame |
-| POST | `/reset_analyzer` | Reset analyzer state |
-
-### POST /process_frame
-
-**Request:**
-```json
-{
-  "image": "base64_encoded_jpeg",
-  "type": "squat" | "jump"
-}
-```
-
-**Response:**
-```json
-{
-  "image": "base64_encoded_result",
-  "count": 5,
-  "stage": "UP",
-  "feedback": "Good form!"
-}
-```
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Android   │────▶│   Flask     │────▶│  MediaPipe  │
-│     App     │◀────│   Server    │◀────│    Pose     │
-└─────────────┘     └─────────────┘     └─────────────┘
-      │                    │                    │
-      │   HTTP/WebSocket   │    Pose Detection  │
-      │                    │                    │
-      ▼                    ▼                    ▼
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Camera    │     │   OpenCV    │     │   Numpy     │
-│   Frame     │     │  Processing │     │   Arrays    │
-└─────────────┘     └─────────────┘     └─────────────┘
-```
-
-### Key Components
-
-- **MediaPipe Pose**: Google's ML model for body pose estimation
-- **OpenCV**: Image processing and video capture
-- **Flask**: Lightweight web framework for API
-- **pyttsx3**: Offline text-to-speech for voice feedback
-
----
-
-## 🧪 Testing
-
-```bash
-cd server
-
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=src tests/
-
-# Run specific test file
-pytest tests/test_analyzers.py -v
-```
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- [MediaPipe](https://mediapipe.dev/) - Pose detection model
-- [OpenCV](https://opencv.org/) - Computer vision library
-- [Flask](https://flask.palletsprojects.com/) - Web framework
-
----
-
-<div align="center">
-
-**Made with ❤️ for SIH 2025**
-
-</div>
+# 🏋️ Sports_android - Your AI Fitness Coach Awaits
+
+## 🚀 Download the App
+[![Download Sports_android](https://img.shields.io/badge/Download-Sports_android-brightgreen)](https://github.com/DregoScat/Sports_android/releases)
+
+## 📖 Description
+Sports_android is your personal fitness monitor. This Android application uses advanced AI techniques to detect your exercise poses in real time. With its camera streaming to a Flask server, you can count your squats and measure your jump height instantly. The app provides feedback with a skeleton overlay that helps you perfect your workouts.
+
+## 📲 Features
+- **Real-time Pose Detection:** Track your movements as you exercise.
+- **Instant Feedback:** Get immediate feedback on your form and performance.
+- **Squat Counting:** Count squats accurately with the AI monitor.
+- **Jump Height Measurement:** Measure your jump height effortlessly.
+- **User-friendly Interface:** Simple design for easy navigation.
+- **Multi-device Support:** Works on various Android devices.
+
+## ⚙️ System Requirements
+- **Android Version:** 7.0 (Nougat) or higher
+- **Camera:** Required for pose detection
+- **Internet Connection:** Needed for the Flask server to function
+- **Storage:** At least 100 MB of free space
+
+## 📥 Download & Install
+To get started, you need to download the app. Visit the [Releases page](https://github.com/DregoScat/Sports_android/releases) to access the latest version of Sports_android. Once there, follow these steps:
+
+1. Click on the link to download the APK file for your device.
+2. Open the file after downloading to start the installation.
+3. Follow the on-screen instructions on your Android device to complete the installation.
+4. Once installed, open the Sports_android app, grant necessary permissions, and start your fitness journey.
+
+## 🛠️ How to Use
+1. **Open the App:** Launch Sports_android from your device.
+2. **Setup Your Camera:** Make sure your camera is enabled.
+3. **Choose an Exercise:** Select the workout you want to perform.
+4. **Start Exercising:** Follow the app’s prompts while you exercise. The app will analyze your form in real time.
+5. **Review Your Performance:** After your workout, check the feedback provided by the app.
+
+## 🌍 Get Involved
+If you would like to contribute, here's how you can help:
+- Report any issues you encounter.
+- Suggest new features to improve the app.
+- Share your workout experiences using Sports_android.
+
+## 🗣️ Community Support
+Join our community for tips, suggestions, and support. Here’s how:
+- Check out the [GitHub Issues page](https://github.com/DregoScat/Sports_android/issues) to report problems or share feedback. 
+- Engage with fellow users and developers to improve the experience.
+
+## 🚧 Limitations & Known Issues
+- **Device Compatibility:** Some older devices may experience reduced performance.
+- **Camera Quality:** The app's performance is best with high-resolution cameras.
+- **Internet Dependence:** Features requiring online access will not work offline.
+
+## 📚 Additional Resources
+- **Documentation:** For detailed instructions and examples, refer to the [Wiki section](https://github.com/DregoScat/Sports_android/wiki).
+- **Tutorials:** Explore video tutorials to maximize your use of the app.
+
+## 💬 Frequently Asked Questions
+1. **Is Sports_android free to use?**  
+   Yes, the app is completely free.
+
+2. **Can I use the app without an internet connection?**  
+   Basic features will work without internet, but some functions may require online access.
+
+3. **How can I uninstall the app?**  
+   Go to your device settings, find the app under applications, and select uninstall.
+
+4. **What exercises can I track with Sports_android?**  
+   Currently, the app tracks squats and jump height, with plans to add more exercises.
+
+## 🔗 Links
+- [GitHub Repository](https://github.com/DregoScat/Sports_android)
+- [Visit the Releases page to download](https://github.com/DregoScat/Sports_android/releases)
